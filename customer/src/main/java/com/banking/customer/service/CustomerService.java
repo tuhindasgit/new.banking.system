@@ -16,7 +16,7 @@ public interface CustomerService {
 	
 	void deleteCustomer(Integer CustomerId);
 	
-	Customer updateCustomer(Customer customer);
+	Customer updateCustomer(Integer customerId,String firstName) throws CloneNotSupportedException;
 	
 	Customer viewCustomer(Integer CustomerId);
 

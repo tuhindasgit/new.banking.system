@@ -2,7 +2,6 @@
 package com.banking.customer.entity;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,22 +9,23 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
- * @author 
+ * @author
  *
  */
-@Entity
-public class Customer {
+@Document
+public class Customer implements Cloneable {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String firstName;
 	private String lastName;
-		
-	
-    @OneToOne(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinColumn(name = "Address_Id", unique = true)
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "Address_Id", unique = true)
 	Address address;
 
 	/**
@@ -41,9 +41,9 @@ public class Customer {
 	 * @param lastName
 	 * @param address
 	 */
-	public Customer(Integer id, String firstName, String lastName, Address address) {
+	public Customer(String firstName, String lastName, Address address) {
 		super();
-		this.id = id;
+
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
@@ -57,7 +57,8 @@ public class Customer {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(Integer id) {
 		this.id = id;
@@ -71,7 +72,8 @@ public class Customer {
 	}
 
 	/**
-	 * @param firstName the firstName to set
+	 * @param firstName
+	 *            the firstName to set
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -85,7 +87,8 @@ public class Customer {
 	}
 
 	/**
-	 * @param lastName the lastName to set
+	 * @param lastName
+	 *            the lastName to set
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -99,10 +102,17 @@ public class Customer {
 	}
 
 	/**
-	 * @param address the address to set
+	 * @param address
+	 *            the address to set
 	 */
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
+
+	// Required because while creating audit we need old and new customer so without
+	// providing this method it does shallow cloning
+	// so old and new customer object is the same.
+	public Customer clone() throws CloneNotSupportedException {
+		return (Customer) super.clone();
+	}
 }

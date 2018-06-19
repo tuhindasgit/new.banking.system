@@ -1,16 +1,16 @@
 package com.banking.customer.entity;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * @author 
  *
  */
-@Entity
+@Document
 public class Address {
 
 	@Id
@@ -80,11 +80,15 @@ public class Address {
 	 * @param zipCode
 	 * @param city
 	 */
-	public Address(Integer id, String street, String zipCode, String city) {
-		super();
-		this.id = id;
+	public Address( String street, String zipCode, String city) {
+	
+
 		this.street = street;
 		this.zipCode = zipCode;
 		this.city = city;
+	}
+	@Override
+	public String toString() {
+		return "Address [id=" + id + ", street=" + street + ", zipCode=" + zipCode + ", city=" + city + "]";
 	}
 }
