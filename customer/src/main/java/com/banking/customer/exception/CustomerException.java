@@ -9,14 +9,31 @@ package com.banking.customer.exception;
  */
 public class CustomerException extends RuntimeException {
 
+
+	private static final long serialVersionUID = 6960130156930538227L;
+	String message;
+
 	/**
 	 * @param message
 	 */
 	public CustomerException(String message) {
+
 		super(message);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	private static final long serialVersionUID = 6960130156930538227L;
+
+		super();
+		this.message=message;
+		
+	}
+
+
+	@Override
+	public String toString() {
+		return  "message= " +message ;
+	}
+
 
 }

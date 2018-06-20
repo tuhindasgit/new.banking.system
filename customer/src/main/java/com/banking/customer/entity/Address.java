@@ -1,21 +1,32 @@
 package com.banking.customer.entity;
 
 import javax.persistence.Column;
+
 import javax.persistence.Entity;
+
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * @author
+
+ * @author 
+
  *
  */
-@Entity
+@Document
 public class Address {
 
 	@Id
+
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "Address_Id")
+
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="Address_Id")
+
 	private Integer id;
 	private String street;
 	private String zipCode;
@@ -35,9 +46,14 @@ public class Address {
 		super();
 	}
 
+
 	/**
 	 * @param id
 	 *            the id to set
+
+	/**
+	 * @param id the id to set
+
 	 */
 	public void setId(Integer id) {
 		this.id = id;
@@ -50,9 +66,14 @@ public class Address {
 		return street;
 	}
 
+
 	/**
 	 * @param street
 	 *            the street to set
+
+	/**
+	 * @param street the street to set
+
 	 */
 	public void setStreet(String street) {
 		this.street = street;
@@ -65,9 +86,14 @@ public class Address {
 		return zipCode;
 	}
 
+
 	/**
 	 * @param zipCode
 	 *            the zipCode to set
+
+	/**
+	 * @param zipCode the zipCode to set
+
 	 */
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
@@ -80,9 +106,14 @@ public class Address {
 		return city;
 	}
 
+
 	/**
 	 * @param city
 	 *            the city to set
+
+	/**
+	 * @param city the city to set
+
 	 */
 	public void setCity(String city) {
 		this.city = city;
@@ -94,11 +125,23 @@ public class Address {
 	 * @param zipCode
 	 * @param city
 	 */
-	public Address(Integer id, String street, String zipCode, String city) {
+
+	public Address( String street, String zipCode, String city) {
 		super();
-		this.id = id;
+	
+	public Address( String street, String zipCode, String city) {
+	
+
+
 		this.street = street;
 		this.zipCode = zipCode;
 		this.city = city;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Address [id=" + id + ", street=" + street + ", zipCode=" + zipCode + ", city=" + city + "]";
+	}
+
 }

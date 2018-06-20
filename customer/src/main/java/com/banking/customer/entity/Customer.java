@@ -2,7 +2,10 @@
 package com.banking.customer.entity;
 
 import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
+
+
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,12 +13,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+
+import org.springframework.data.mongodb.core.mapping.Document;
+
+
 /**
  * @author
  *
  */
-@Entity
-public class Customer {
+@Document
+public class Customer implements Cloneable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,9 +47,13 @@ public class Customer {
 	 * @param lastName
 	 * @param address
 	 */
-	public Customer(Integer id, String firstName, String lastName, Address address) {
+
+	public Customer( String firstName, String lastName, Address address) {
 		super();
-		this.id = id;
+
+	public Customer(String firstName, String lastName, Address address) {
+		super();
+
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
@@ -106,6 +117,14 @@ public class Customer {
 	 */
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+
+	// Required because while creating audit we need old and new customer so without
+	// providing this method it does shallow cloning
+	// so old and new customer object is the same.
+	public Customer clone() throws CloneNotSupportedException {
+		return (Customer) super.clone();
 	}
 
 }
