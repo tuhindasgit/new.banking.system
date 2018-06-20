@@ -13,6 +13,15 @@ import com.banking.customer.entity.Customer;
 public interface CustomerService {
 
 	Customer addCustomer(Customer customer);
+
+
+	void deleteCustomer(Integer CustomerId);
+
+	Customer updateCustomer(String firstName, String lastname, Integer customerId);
+
+	Customer viewCustomer(Integer CustomerId);
+
+
 	
 	void deleteCustomer(Integer CustomerId);
 	
@@ -22,4 +31,5 @@ public interface CustomerService {
 
 	
 	
+
 }
